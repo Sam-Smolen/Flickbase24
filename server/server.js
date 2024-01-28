@@ -5,6 +5,8 @@ require('dotenv').config();
 
 const bodyParser = require('body-parser');
 
+const routes = require('./routes')
+
 const mongoURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}?retryWrites=true&w=majority`;
 
 mongoose.connect(mongoURI);
@@ -12,6 +14,9 @@ console.log('mongoose connected');
 
 // PARSING
 app.use(bodyParser.json());
+
+//ROUTES
+app.use('/api',routes)
 
 const port = process.env.PORT || 3001;
 app.listen(port, ()=> {
